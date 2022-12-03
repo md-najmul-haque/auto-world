@@ -1,12 +1,15 @@
 import './App.css';
-import Navbar from '../components/Shared/Navbar';
+import Home from './components/Home/Home';
+import Navbar from './components/Shared/Navbar';
+
 
 function App() {
   return (
-    <div className="App">
-
+    <div className="container mx-auto">
       <Navbar />
+      <Home />
     </div>
+
   );
 }
 
