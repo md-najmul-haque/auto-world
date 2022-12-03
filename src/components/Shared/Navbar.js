@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -11,7 +12,7 @@ const Navbar = () => {
                     <input type="text" placeholder="Search" className="input input-bordered" />
                 </div>
                 <div>
-                    <button className='btn btn-error'>Sell a car</button>
+                    <Link to='/addCar' className='btn btn-error'>Add car</Link>
                 </div>
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle">
