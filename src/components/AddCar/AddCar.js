@@ -15,12 +15,14 @@ const AddCar = () => {
             price: data.price,
         }
         console.log(car)
+
         fetch('http://localhost:5000/api/v1/car', {
             method: "POST",
-            body: JSON.stringify(car),
-            Headers: {
+            headers: {
                 'content-type': 'application/json'
-            }
+            },
+            body: JSON.stringify(car)
+
         })
             .then(res => res.json())
             .then(data => console.log(data))
@@ -40,7 +42,7 @@ const AddCar = () => {
                     <div className="card w-96 bg-base-100 p-5 shadow-xl">
                         <h2 className='text-2xl font-semibold text-center p-5'>Add Car</h2>
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" placeholder="Enter car name"
+                            <input type="text" name='carName' placeholder="Enter car name"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("carName", {
                                     required: {
@@ -53,7 +55,7 @@ const AddCar = () => {
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="number" placeholder="Enter Mileage"
+                            <input type="number" name='mileage' placeholder="Enter Mileage"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("mileage", {
                                     required: {
@@ -67,7 +69,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" placeholder="Enter Location"
+                            <input type="text" name="location" placeholder="Enter Location"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("location", {
                                     required: {
@@ -81,7 +83,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" placeholder="Enter Engine"
+                            <input type="text" name='engine' placeholder="Enter Engine"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("engine", {
                                     required: {
@@ -95,7 +97,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" placeholder="Enter Transmission"
+                            <input type="text" name='transmission' placeholder="Enter Transmission"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("transmission", {
                                     required: {
@@ -109,7 +111,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="number" placeholder="Enter Price"
+                            <input type="number" name='price' placeholder="Enter Price"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("price", {
                                     required: {

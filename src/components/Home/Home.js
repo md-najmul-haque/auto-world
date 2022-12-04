@@ -1,26 +1,37 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Car from '../Car/Car';
+import Loading from '../Shared/Loading';
 
 const Home = () => {
 
-    const { isLoading, error, cars } = useQuery({
-        queryKey: ['cars'],
-        queryFn: () =>
-            fetch('http://localhost:5000/api/v1/car').then(res =>
-                res.json()
-            )
-    })
+    const { data: cars, isLoading, refetch } = useQuery(['cars'], () =>
+        fetch('http://localhost:5000/api/v1/car')
+            .then(res => res.json())
+    )
 
-    if (isLoading) return 'Loading...'
+    // const { isLoading, error, cars } = useQuery({
+    //     queryKey: ['cars'],
+    //     queryFn: () =>
+    //         fetch('http://localhost:5000/api/v1/car').then(res =>
+    //             res.json()
+    //         )
+    // })
 
-    if (error) return 'An error has occurred: ' + error.message
+    console.log(cars)
+
+    if (isLoading) {
+        return <Loading />
+    }
+
+
 
     return (
-        <div className='grid grid-cols-4 mx-auto'>
-            <div>1</div>
-            <div className='col-span-2'>2</div>
-            <div>3</div>
-        </div>
+        <>
+            {
+                cars.result.map(car => <Car key={car._id} car={car} />)
+            }
+        </>
     );
 };
 
