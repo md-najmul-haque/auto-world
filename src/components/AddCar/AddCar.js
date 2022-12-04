@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { json } from 'react-router-dom';
 
 
 const AddCar = () => {
@@ -18,10 +17,10 @@ const AddCar = () => {
         console.log(car)
         fetch('http://localhost:5000/api/v1/car', {
             method: "POST",
+            body: JSON.stringify(car),
             Headers: {
                 'content-type': 'application/json'
-            },
-            body: JSON.stringify(car)
+            }
         })
             .then(res => res.json())
             .then(data => console.log(data))
@@ -36,8 +35,6 @@ const AddCar = () => {
     return (
         <div>
             <h3>this is add car</h3>
-
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='w-96 mx-auto'>
                     <div className="card w-96 bg-base-100 p-5 shadow-xl">
