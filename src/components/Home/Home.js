@@ -6,6 +6,7 @@ import Loading from '../Shared/Loading';
 import { BsBriefcase } from 'react-icons/bs';
 import { AiOutlineDollarCircle, AiOutlinePlus, AiOutlineSetting, AiOutlineTool } from 'react-icons/ai';
 import { IoLocationOutline, IoColorPaletteOutline } from 'react-icons/io5';
+import { RxCross2 } from 'react-icons/rx';
 
 const Home = () => {
 
@@ -64,6 +65,15 @@ const Home = () => {
                     </div>
                     <div className='flex justify-between  pb-5 items-center'>
                         <li><Link to=''> <IoColorPaletteOutline /> Color</Link></li> <AiOutlinePlus />
+                    </div>
+                    <div className='py-2'>
+                        <span className='text-gray-300'>Found Cars: </span><span className='text-xl font-semibold'>12324</span>
+                    </div>
+                    <div className='flex justify-between items-center'>
+                        <button className='btn btn-error px-10 btn-sm normal-case'>Show</button>
+                        <span className='text-error px-5'>
+                            <RxCross2 />
+                        </span>
                     </div>
                 </ul>
 
