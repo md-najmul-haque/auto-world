@@ -21,15 +21,15 @@ const Car = ({ car }) => {
             <div className="card-body">
 
                 <div className='flex justify-between'>
-                    <p>Mileage: {mileage}</p>
-                    <p>Location: {location}</p>
+                    <p><span className='text-gray-400'>Mileage:</span> {mileage} KM</p>
+                    <p><span className='text-gray-400'>Location:</span>  {location}</p>
                 </div>
                 <div className='flex justify-between'>
-                    <p>Engine: {engine}</p>
-                    <p>Transmission: {transmission}</p>
+                    <p><span className='text-gray-400'>Engine:</span> {engine}</p>
+                    <p><span className='text-gray-400'>Transmission:</span> {transmission}</p>
                 </div>
                 <div className='flex justify-between'>
-                    <p>Price: {price}</p>
+                    <p className='text-xl font-bold'>{price}$ </p>
                     <Link to='' className="btn btn-error normal-case btn-sm px-5">More details</Link>
                 </div>
 
