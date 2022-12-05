@@ -34,9 +34,7 @@ const AddCar = () => {
                         price: data.price,
                     }
 
-                    console.log(car)
-
-                    fetch('http://localhost:5000/api/v1/car', {
+                    fetch('http://localhost:5001/api/v1/car', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json'
@@ -45,7 +43,12 @@ const AddCar = () => {
 
                     })
                         .then(res => res.json())
-                        .then(data => console.log(data))
+                        .then(data => {
+                            if (data.status === 'success') {
+                                reset()
+                                // console.log(data)
+                            }
+                        })
 
                 }
             })
