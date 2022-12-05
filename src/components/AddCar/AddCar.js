@@ -5,27 +5,53 @@ import { useForm } from 'react-hook-form';
 const AddCar = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const onSubmit = data => {
-        const car = {
-            carName: data.carName,
-            mileage: data.mileage,
-            location: data.location,
-            engine: data.engine,
-            transmission: data.transmission,
-            price: data.price,
-        }
-        console.log(car)
 
-        fetch('http://localhost:5000/api/v1/car', {
+    const imageStorageKey = "659c9f3714e59a5aab97b06d91ac3782"
+
+    const onSubmit = data => {
+
+        const image = data.image[0]
+        const formData = new FormData();
+        formData.append('image', image);
+
+        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`
+
+        fetch(url, {
             method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(car)
+            body: formData
 
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(result => {
+                if (result.success === true) {
+                    const car = {
+                        carName: data.carName,
+                        mileage: data.mileage,
+                        location: data.location,
+                        engine: data.engine,
+                        transmission: data.transmission,
+                        img: result.data.url,
+                        price: data.price,
+                    }
+
+                    console.log(car)
+
+                    fetch('http://localhost:5000/api/v1/car', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(car)
+
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+
+                }
+            })
+
+
+
 
     };
 
@@ -42,7 +68,7 @@ const AddCar = () => {
                     <div className="card w-96 bg-base-100 p-5 shadow-xl">
                         <h2 className='text-2xl font-semibold text-center p-5'>Add Car</h2>
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" name='carName' placeholder="Enter car name"
+                            <input type="text" placeholder="Enter car name"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("carName", {
                                     required: {
@@ -55,7 +81,7 @@ const AddCar = () => {
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="number" name='mileage' placeholder="Enter Mileage"
+                            <input type="number" placeholder="Enter Mileage"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("mileage", {
                                     required: {
@@ -69,7 +95,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" name="location" placeholder="Enter Location"
+                            <input type="text" placeholder="Enter Location"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("location", {
                                     required: {
@@ -83,7 +109,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" name='engine' placeholder="Enter Engine"
+                            <input type="text" placeholder="Enter Engine"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("engine", {
                                     required: {
@@ -97,7 +123,7 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="text" name='transmission' placeholder="Enter Transmission"
+                            <input type="text" placeholder="Enter Transmission"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("transmission", {
                                     required: {
@@ -111,7 +137,21 @@ const AddCar = () => {
                         </div>
 
                         <div className="form-control w-full max-w-xs mx-auto">
-                            <input type="number" name='price' placeholder="Enter Price"
+                            <input type="file" placeholder="Enter Car Image"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("image", {
+                                    required: {
+                                        value: true,
+                                        message: "Image is required"
+                                    },
+                                })} />
+                            <label className="label">
+                                {errors.transmission?.type === 'required' && <span className="label-text-alt text-red-600">{errors.transmission.message}</span>}
+                            </label>
+                        </div>
+
+                        <div className="form-control w-full max-w-xs mx-auto">
+                            <input type="number" placeholder="Enter Price"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("price", {
                                     required: {
