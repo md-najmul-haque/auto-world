@@ -62,7 +62,7 @@ const AddCar = () => {
 
     return (
         <div>
-            <h3>this is add car</h3>
+
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='w-96 mx-auto'>
                     <div className="card w-96 bg-base-100 p-5 shadow-xl">

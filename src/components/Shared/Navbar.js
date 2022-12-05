@@ -5,10 +5,10 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">Auto World</a>
+                <Link to='/' className="btn btn-ghost uppercase text-xl">Auto World</Link>
             </div>
             <div className="flex-none gap-2">
-                <div className="form-control">
+                <div className="form-control navbar-center">
                     <input type="text" placeholder="Search" className="input input-bordered" />
                 </div>
                 <div>
